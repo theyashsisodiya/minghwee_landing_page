@@ -4,10 +4,6 @@ import { ChatMessage } from '../types';
 import { Send, Sparkles, X, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Fix: Cast motion components to any to resolve TypeScript errors with specific framer-motion versions
-const MotionButton = motion.button as any;
-const MotionDiv = motion.div as any;
-
 export const Assistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -50,7 +46,7 @@ export const Assistant: React.FC = () => {
     <>
       <AnimatePresence>
         {!isOpen && (
-          <MotionButton
+          <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
@@ -61,13 +57,13 @@ export const Assistant: React.FC = () => {
             <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
               Need Help?
             </span>
-          </MotionButton>
+          </motion.button>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
         {isOpen && (
-          <MotionDiv
+          <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -131,7 +127,7 @@ export const Assistant: React.FC = () => {
                 </button>
               </div>
             </div>
-          </MotionDiv>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

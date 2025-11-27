@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Menu, X, ArrowRight, CheckCircle, Star,
@@ -9,9 +9,6 @@ import Lenis from 'lenis';
 import { NAV_LINKS, TESTIMONIALS, FAQS } from './constants';
 import { Assistant } from './components/Assistant';
 
-// Fix: Cast motion components to any to resolve TypeScript errors with specific framer-motion versions
-const MotionDiv = motion.div as any;
-
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -19,7 +16,7 @@ function App() {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroY = useTransform(scrollY, [0, 300], [0, 100]);
 
-  // Robust Smooth Scroll Implementation
+  // Smooth Scroll Implementation
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -27,28 +24,27 @@ function App() {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
       touchMultiplier: 2,
     });
 
-    let rafId: number;
-    
     function raf(time: number) {
       lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
+      requestAnimationFrame(raf);
     }
 
-    rafId = requestAnimationFrame(raf);
+    requestAnimationFrame(raf);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     
+    // Use Lenis scroll event if possible, or fallback to window
+    // lenis.on('scroll', handleScroll); 
+    // Fallback to standard listener for react state to avoid syncing issues
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       lenis.destroy();
-      cancelAnimationFrame(rafId); // Critical: Stop the loop to prevent scroll locking
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -106,7 +102,7 @@ function App() {
       <header className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-honey/20 to-transparent -z-10 rounded-l-full blur-3xl" />
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <MotionDiv style={{ opacity: heroOpacity, y: heroY }} className="space-y-6 max-w-xl">
+          <motion.div style={{ opacity: heroOpacity, y: heroY }} className="space-y-6 max-w-xl">
             <span className="inline-block px-4 py-1 bg-brand-terracotta/10 text-brand-terracotta rounded-full text-sm font-semibold tracking-wide">
               #1 TRUSTED PLATFORM
             </span>
@@ -135,9 +131,9 @@ function App() {
                 <span className="text-lg">10,000+ Happy Families</span>
               </div>
             </div>
-          </MotionDiv>
+          </motion.div>
 
-          <MotionDiv 
+          <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -159,7 +155,7 @@ function App() {
                 <p className="text-xs text-gray-500">Just now</p>
               </div>
             </div>
-          </MotionDiv>
+          </motion.div>
         </div>
       </header>
 
@@ -187,7 +183,7 @@ function App() {
                     </div>
                     <div>
                       <h4 className="text-xl font-bold text-gray-800 group-hover:text-brand-terracotta transition-colors">{item.title}</h4>
-                      <p className="text-lg text-gray-600 mt-2 leading-relaxed">{item.desc}</p>
+                      <p className="text-gray-600 text-lg mt-2 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -259,7 +255,7 @@ function App() {
                     </div>
                     <div>
                       <h4 className="text-xl font-bold text-gray-800 group-hover:text-brand-terracotta transition-colors">{item.title}</h4>
-                      <p className="text-lg text-gray-600 mt-2 leading-relaxed">{item.desc}</p>
+                      <p className="text-gray-600 text-lg mt-2 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -282,7 +278,7 @@ function App() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((story) => (
-              <MotionDiv 
+              <motion.div 
                 key={story.id}
                 whileHover={{ y: -10 }}
                 className="bg-white p-8 rounded-3xl shadow-sm border border-brand-beige flex flex-col items-center text-center"
@@ -295,7 +291,7 @@ function App() {
                   <h4 className="font-bold text-brand-burgundy">{story.author}</h4>
                   <span className="text-sm text-brand-terracotta font-medium uppercase tracking-wide">{story.role}</span>
                 </div>
-              </MotionDiv>
+              </motion.div>
             ))}
           </div>
         </div>
