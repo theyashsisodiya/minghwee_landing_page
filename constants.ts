@@ -14,7 +14,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "MingHwee helped me find not just an employer, but a family who truly values my work. I feel respected and supported every day.",
     author: "Maria Santos",
     role: "Domestic Helper",
-    image: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&q=80&w=200&h=200"
+    image: "https://github.com/theyashsisodiya/MingHwee_Detailed_Workflow/blob/main/nano-edit-17641513130172.png?raw=true"
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "Professional, transparent, and kind. The training resources provided helped me secure a better salary.",
     author: "Siti Rahma",
     role: "Caregiver",
-    image: "https://images.unsplash.com/photo-1554721205-f9e498c4d2fb?auto=format&fit=crop&q=80&w=200&h=200"
+    image: "https://plus.unsplash.com/premium_photo-1661775756810-82dbd209fc95?q=80&w=200&h=200&auto=format&fit=crop"
   }
 ];
 

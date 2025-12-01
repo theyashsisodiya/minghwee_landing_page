@@ -6,19 +6,47 @@
     <title>MingHwee - Trust & Care</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+    
+    <!-- PRIMARY: Requested GSAP CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Physics2DPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
+
     <style>
+      /* Global Reset for Scrolling Compatibility */
+      html, body {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        /* Ensure standard overflow handling so fallback scrolling works */
+        overflow-x: hidden;
+        /* CRITICAL FIX: Set background color to match brand cream to prevent "black/white" voids during fast scroll */
+        background-color: #FDFCDC; 
+      }
+      
+      /* Lenis Specific Styles (Secondary) */
       html.lenis, html.lenis body {
         height: auto;
       }
+      
       .lenis.lenis-smooth {
         scroll-behavior: auto !important;
       }
+      
       .lenis.lenis-smooth [data-lenis-prevent] {
         overscroll-behavior: contain;
       }
+      
       .lenis.lenis-stopped {
         overflow: hidden;
       }
+      
       .lenis.lenis-scrolling iframe {
         pointer-events: none;
       }
@@ -33,19 +61,19 @@
             },
             colors: {
               brand: {
-                terracotta: '#D97757', // Primary warm
-                coral: '#E07A5F',      // Soft warm
-                cream: '#FDFCDC',      // Background
-                beige: '#F4F1DE',      // Section bg
-                burgundy: '#6D2E46',   // Text/Accent
-                honey: '#F2CC8F',      // Accent
+                terracotta: '#D97757',
+                coral: '#E07A5F',
+                cream: '#FDFCDC',
+                beige: '#F4F1DE',
+                burgundy: '#6D2E46',
+                honey: '#F2CC8F',
               }
             }
           }
         }
       }
     </script>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
@@ -56,13 +84,11 @@
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
     "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.mjs",
-    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
-    "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
   </body>
